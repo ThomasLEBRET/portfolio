@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card';
+import { CV } from '../data/cv';
+import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-react';
+---
+
+<Layout title={`Portfolio - ${CV.name}`}>
+  <main class="min-h-screen bg-slate-950 text-slate-200 p-4 md:p-8 font-sans selection:bg-blue-500/30">
+    
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 grid-rows-auto gap-4">
+
+      {/* BLOC 1 : PROFIL */}
+      <Card client:load className="md:col-span-2 md:row-span-2 flex flex-col justify-between min-h-[300px]" delay={0.1}>
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-500/20 animate-pulse">
+              Open to work
+            </span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+            {CV.name}
+          </h1>
+          <p class="text-lg text-slate-400 leading-relaxed max-w-md">
+            {CV.role}
+          </p>
+        </div>
+        <div class="mt-8">
+            <p class="text-sm text-slate-500">{CV.about}</p>
+        </div>
+      </Card>
+
+      {/* BLOC 2 : SOCIAL / CONTACT */}
+      <Card client:load className="md:col-span-1 flex flex-col justify-center gap-4" delay={0.2}>
+        <a href={`mailto:${CV.contact.email}`} class="flex items-center gap-3 hover:text-blue-400 transition-colors">
+            <div class="p-2 bg-slate-800 rounded-lg"><Mail size={18} /></div>
+            <span class="text-sm font-medium">Email Me</span>
+        </a>
+        
+        <a href={`tel:${CV.contact.phone.replace(/ /g,'')}`} class="flex items-center gap-3 hover:text-green-400 transition-colors">
+            <div class="p-2 bg-slate-800 rounded-lg"><Phone size={18} /></div>
+            <span class="text-sm font-medium">Call Me</span>
+        </a>
+
+        {/* Nouveau lien LinkedIn */}
+        <a href={`https://${CV.contact.linkedin}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-sky-400 transition-colors">
+            <div class="p-2 bg-slate-800 rounded-lg"><Linkedin size={18} /></div>
+            <span class="text-sm font-medium">LinkedIn</span>
+        </a>
+
+        <div class="flex items-center gap-3 text-slate-400">
+            <div class="p-2 bg-slate-800 rounded-lg"><MapPin size={18} /></div>
+            <span class="text-sm font-medium">{CV.location}</span>
+        </div>
+      </Card>
+
+      {/* BLOC 3 : LA STACK TECHNIQUE */}
+      <Card client:load className="md:col-span-1 md:row-span-2 bg-gradient-to-b from-slate-900 to-slate-950" delay={0.3}>
+        <div class="flex items-center gap-2 mb-6 text-blue-400">
+            <Terminal size={20} />
+            <h2 class="font-bold uppercase tracking-wider text-sm">Tech Stack</h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+            {CV.skills.map(skill => (
+                <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-md text-xs font-mono hover:border-blue-500/50 hover:bg-blue-500/10 transition-colors cursor-default">
+                    {skill}
+                </span>
+            ))}
+        </div>
+        <div class="mt-8 pt-6 border-t border-slate-800">
+            <div class="text-xs text-slate-500 font-mono mb-2">$ whoami</div>
+            <div class="text-xs text-green-400 font-mono">
+                > Hybrid Profile<br/>
+                > Project Manager<br/>
+                > DevOps Engineer
+            </div>
+        </div>
+      </Card>
+
+      {/* BLOC 4 : EXPERIENCE (Mise à jour avec listes à puces) */}
+      <Card client:load className="md:col-span-2 md:row-span-2 overflow-y-auto" delay={0.4}>
+         <div class="flex items-center gap-2 mb-6 text-purple-400">
+            <Layers size={20} />
+            <h2 class="font-bold uppercase tracking-wider text-sm">Expérience</h2>
+        </div>
+        <div class="space-y-8">
+            {CV.experience.map((job) => (
+                <div class="relative pl-6 border-l border-slate-800 last:border-0">
+                    <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-slate-700 ring-4 ring-slate-900"></div>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="font-bold text-white">{job.role}</h3>
+                        <span class="text-xs text-slate-500 font-mono">{job.period}</span>
+                    </div>
+                    <div class="text-sm text-blue-400 mb-3">{job.company}</div>
+                    
+                    {/* Liste des détails */}
+                    <ul class="text-sm text-slate-400 leading-relaxed mb-3 list-disc list-outside ml-4 space-y-1">
+                        {job.details.map(point => (
+                            <li>{point}</li>
+                        ))}
+                    </ul>
+
+                    <div class="flex gap-2 flex-wrap">
+                        {job.stack.map(t => (
+                            <span class="text-[10px] px-1.5 py-0.5 bg-slate-800 rounded text-slate-300">{t}</span>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+      </Card>
+
+       {/* BLOC 5 : BÉNÉVOLAT (Remplace Innovation) */}
+       <Card client:load className="md:col-span-1 flex flex-col justify-center" delay={0.5}>
+          <div class="flex items-center gap-2 mb-4 text-pink-400">
+            <Heart size={20} />
+            <h2 class="font-bold uppercase tracking-wider text-sm">Bénévolat</h2>
+          </div>
+          <h3 class="font-bold text-white text-sm">{CV.volunteering.organization}</h3>
+          <p class="text-xs text-slate-500 mb-2">{CV.volunteering.period}</p>
+          <p class="text-sm text-slate-400">
+            {CV.volunteering.desc}
+          </p>
+      </Card>
+      
+      {/* BLOC 6 : FORMATION (Avec années complètes) */}
+       <Card client:load className="md:col-span-1" delay={0.6}>
+         <h2 class="font-bold text-white mb-4">Formation</h2>
+         <ul class="space-y-4">
+            {CV.education.map(edu => (
+                <li class="flex flex-col border-b border-slate-800/50 last:border-0 pb-2 last:pb-0">
+                    <span class="text-sm font-medium text-slate-200">{edu.degree}</span>
+                    <div class="flex justify-between items-end mt-1">
+                        <span class="text-xs text-slate-500">{edu.school}</span>
+                        <span class="text-xs text-slate-600 font-mono">{edu.year}</span>
+                    </div>
+                </li>
+            ))}
+         </ul>
+      </Card>
+
+    </div>
+  </main>
+</Layout>
