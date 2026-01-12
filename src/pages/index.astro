@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SkillBadge from '../components/SkillBadge.astro'; 
 import Card from '../components/Card';
 import { CV } from '../data/cv';
 import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-react';
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
 ---
 
 <Layout title={`Portfolio - ${CV.name}`}>
@@ -42,7 +45,6 @@ import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-r
             <span class="text-sm font-medium">Call Me</span>
         </a>
 
-        {/* Nouveau lien LinkedIn */}
         <a href={`https://${CV.contact.linkedin}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-sky-400 transition-colors">
             <div class="p-2 bg-slate-800 rounded-lg"><Linkedin size={18} /></div>
             <span class="text-sm font-medium">LinkedIn</span>
@@ -54,30 +56,29 @@ import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-r
         </div>
       </Card>
 
-      {/* BLOC 3 : LA STACK TECHNIQUE */}
+      {/* BLOC 3 : LA STACK TECHNIQUE - CORRIGÉ */}
       <Card client:load className="md:col-span-1 md:row-span-2 bg-gradient-to-b from-slate-900 to-slate-950" delay={0.3}>
         <div class="flex items-center gap-2 mb-6 text-blue-400">
             <Terminal size={20} />
             <h2 class="font-bold uppercase tracking-wider text-sm">Tech Stack</h2>
         </div>
         <div class="flex flex-wrap gap-2">
+            {/* Utilisation du composant SkillBadge avec les props attendues */}
             {CV.skills.map(skill => (
-                <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-md text-xs font-mono hover:border-blue-500/50 hover:bg-blue-500/10 transition-colors cursor-default">
-                    {skill}
-                </span>
+                <SkillBadge name={skill} />
             ))}
         </div>
         <div class="mt-8 pt-6 border-t border-slate-800">
             <div class="text-xs text-slate-500 font-mono mb-2">$ whoami</div>
             <div class="text-xs text-green-400 font-mono">
-                > Hybrid Profile<br/>
-                > Project Manager<br/>
-                > DevOps Engineer
+                &gt; Hybrid Profile<br/>
+                &gt; Project Manager<br/>
+                &gt; DevOps Engineer
             </div>
         </div>
       </Card>
 
-      {/* BLOC 4 : EXPERIENCE (Mise à jour avec listes à puces) */}
+      {/* BLOC 4 : EXPERIENCE */}
       <Card client:load className="md:col-span-2 md:row-span-2 overflow-y-auto" delay={0.4}>
          <div class="flex items-center gap-2 mb-6 text-purple-400">
             <Layers size={20} />
@@ -93,7 +94,6 @@ import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-r
                     </div>
                     <div class="text-sm text-blue-400 mb-3">{job.company}</div>
                     
-                    {/* Liste des détails */}
                     <ul class="text-sm text-slate-400 leading-relaxed mb-3 list-disc list-outside ml-4 space-y-1">
                         {job.details.map(point => (
                             <li>{point}</li>
@@ -110,7 +110,7 @@ import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-r
         </div>
       </Card>
 
-       {/* BLOC 5 : BÉNÉVOLAT (Remplace Innovation) */}
+       {/* BLOC 5 : BÉNÉVOLAT */}
        <Card client:load className="md:col-span-1 flex flex-col justify-center" delay={0.5}>
           <div class="flex items-center gap-2 mb-4 text-pink-400">
             <Heart size={20} />
@@ -123,7 +123,7 @@ import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-r
           </p>
       </Card>
       
-      {/* BLOC 6 : FORMATION (Avec années complètes) */}
+      {/* BLOC 6 : FORMATION */}
        <Card client:load className="md:col-span-1" delay={0.6}>
          <h2 class="font-bold text-white mb-4">Formation</h2>
          <ul class="space-y-4">
@@ -138,6 +138,32 @@ import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-r
             ))}
          </ul>
       </Card>
+
+      {/* BLOC 7 : NOTES TECHNIQUES */}
+        <Card client:load className="md:col-span-4" delay={0.7}>
+        <div class="flex items-center gap-2 mb-4 text-orange-400">
+            <Terminal size={20} />
+            <h2 class="font-bold uppercase tracking-wider text-sm">Notes & Insights</h2>
+        </div>
+
+        {posts.length > 0 ? (
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {posts.map(post => (
+                    <a href={`/blog/${post.slug}`} class="p-4 bg-slate-900/50 border border-slate-800 rounded-lg hover:border-orange-500/50 transition-all group">
+                        <div class="text-[10px] text-slate-500 font-mono mb-1">
+                            {post.data.pubDate.toLocaleDateString('fr-FR')}
+                        </div>
+                        <h3 class="text-sm font-bold group-hover:text-orange-400">{post.data.title}</h3>
+                        <p class="text-xs text-slate-400 mt-2 line-clamp-2">{post.data.description}</p>
+                    </a>
+                ))}
+            </div>
+        ) : (
+            <div class="py-8 text-center border border-dashed border-slate-800 rounded-lg">
+            <p class="text-sm text-slate-500 font-mono italic">Aucune note publiée pour le moment.</p>
+            </div>
+        )}
+        </Card>
 
     </div>
   </main>

@@ -1,7 +1,12 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
+import tailwind from "@astrojs/tailwind";
+import react from "@astrojs/react";
+import mermaid from "astro-mermaid";
 
 export default defineConfig({
-  integrations: [react(), tailwind()],
+  integrations: [
+    tailwind(),
+    react(),
+    mermaid()
+  ]
 });

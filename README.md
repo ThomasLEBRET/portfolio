@@ -1,3 +1,4 @@
+![Quality Gate](https://github.com/ThomasLEBRET/portfolio/actions/workflows/quality-gate.yml/badge.svg)
 # 🚀 Mon Portfolio - Thomas Lebret
 
 Bienvenue sur le dépôt de mon portfolio personnel. Ce projet présente mon parcours, mes compétences et mes réalisations acquises durant mon cursus (BTS SIO) et mes projets personnels.
