@@ -1,35 +1,39 @@
-![Quality Gate](https://github.com/ThomasLEBRET/portfolio/actions/workflows/quality-gate.yml/badge.svg)
+![Build Status](https://github.com/ThomasLEBRET/portfolio/actions/workflows/quality-gate.yaml/badge.svg)
+![Astro](https://img.shields.io/badge/Astro-v5.0-BC52EE?logo=astro)
+![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?logo=cloudflare&logoColor=white)
 # 🚀 Mon Portfolio - Thomas Lebret
 
-Bienvenue sur le dépôt de mon portfolio personnel. Ce projet présente mon parcours, mes compétences et mes réalisations acquises durant mon cursus (BTS SIO) et mes projets personnels.
-
-
+Bienvenue sur le dépôt de mon portfolio personnel. Ce projet est une vitrine de mes compétences techniques et de mes projets, conçu pour être rapide, minimaliste et maintenable.
 
 ## 🛠️ Stack Technique
 
-- **Framework :** [Astro](https://astro.build/) (v4+)
-- **Style :** Tailwind CSS
-- **Hébergement :** Cloudflare Pages
-- **DNS :** OVH géré par Cloudflare
+- **Framework :** [Astro](https://astro.build/) (v5+)
+- **UI :** React + Tailwind CSS
+- **Interactivité :** Framer Motion & Lucide Icons
+- **Diagrammes :** Mermaid.js
+- **Hébergement :** Cloudflare Pages (Déploiement via Wrangler)
+- **CI/CD :** GitHub Actions (Quality Gate personnalisée)
 
-## 📦 Structure du projet
+## 🚢 Architecture CI/CD & Quality Gate
 
-```text
-/
-├── public/          # Fichiers statiques (favicon, images, PDF)
-├── src/
-│   ├── components/  # Composants Astro/React/Vue réutilisables
-│   ├── layouts/     # Templates de mise en page (MainLayout.astro)
-│   └── pages/       # Routes (index.astro, projets.astro, etc.)
-├── package.json     # Scripts et dépendances
-└── astro.config.mjs # Configuration spécifique à Astro
-```
+Ce projet utilise un pipeline de déploiement continu automatisé. Contrairement à un déploiement GitHub classique, j'ai mis en place une **Quality Gate** stricte pour garantir la stabilité de la production.
+
+
+
+Chaque modification sur la branche `main` déclenche le workflow suivant :
+
+1. **🔍 Linting (ESLint)** : Analyse du code pour détecter les erreurs de syntaxe et de style.
+2. **🏗️ Astro Check** : Validation TypeScript et intégrité des composants Astro.
+3. **🔨 Build Test** : Simulation de la génération du site pour prévenir les échecs de build.
+4. **🚀 Deploy** : Déploiement vers Cloudflare Pages via un API Token sécurisé. Cette étape n'est lancée que si tous les tests précédents ont réussi.
+
+> **Note :** Les déploiements automatiques directs de Cloudflare ont été désactivés au profit de ce workflow pour assurer un contrôle total sur la qualité avant mise en ligne.
 
 ## 🚀 Installation et Développement Local
 
-Si vous souhaitez faire tourner le projet sur votre machine :
+Si vous souhaitez explorer le projet localement :
 
-1. **Cloner le dépôt**
+1. **Cloner le projet**
    ```bash
    git clone https://github.com/ThomasLEBRET/portfolio.git
    cd portfolio
@@ -44,15 +48,14 @@ Si vous souhaitez faire tourner le projet sur votre machine :
    ```bash
    npm run dev
    ```
-   Accédez au site sur : `http://localhost:4321`
 
-## 🚢 Déploiement Continu (CI/CD)
+## 📂 Structure du Projet
 
-Ce portfolio utilise une architecture **Jamstack**
-
-1. **Push** : Chaque modification poussée sur la branche `main` déclenche un build de pré-production.
-2. **Build** : Cloudflare Pages récupère le code, exécute `npm run build` et génère les fichiers statiques.
-3. **Distribution** : Le site est déployé sur le réseau CDN mondial de Cloudflare et associé au domaine [thomaslebret.cloud](https://thomaslebret.cloud)
+Le projet suit la structure standard d'Astro :
+- `src/content/` : Contient mes articles de blog et notes au format Markdown.
+- `src/components/` : Composants React et Astro réutilisables.
+- `src/pages/` : Routes et pages du site.
+- `public/` : Ressources statiques (favicon, images).
 
 ---
 *Fait avec ❤️ par Thomas Lebret*
