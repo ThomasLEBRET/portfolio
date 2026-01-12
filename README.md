@@ -1,6 +1,7 @@
 ![Build Status](https://github.com/ThomasLEBRET/portfolio/actions/workflows/quality-gate.yaml/badge.svg)
 ![Astro](https://img.shields.io/badge/Astro-v5.0-BC52EE?logo=astro)
 ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?logo=cloudflare&logoColor=white)
+![Status](https://img.shields.io/uptimerobot/status/m802134733-73b8ac97ffc951c6b4b3f7d5?label=Live&logo=uptimerobot&color=brightgreen)
 # 🚀 Mon Portfolio - Thomas Lebret
 
 Bienvenue sur le dépôt de mon portfolio personnel. Ce projet est une vitrine de mes compétences techniques et de mes projets, conçu pour être rapide, minimaliste et maintenable.
@@ -18,6 +19,20 @@ Bienvenue sur le dépôt de mon portfolio personnel. Ce projet est une vitrine d
 
 Ce projet utilise un pipeline de déploiement continu automatisé. Contrairement à un déploiement GitHub classique, j'ai mis en place une **Quality Gate** stricte pour garantir la stabilité de la production.
 
+```mermaid
+graph TD
+    A[💻 Dev Push Code] -->|Push main| B[🐙 GitHub Repo]
+    B --> C{🔍 GitHub Actions}
+    subgraph Quality Gate
+    C --> D[ESLint]
+    C --> E[Astro Check]
+    C --> F[Build Test]
+    end
+    D & E & F -->|Success| G[🚀 Deploy to Cloudflare]
+    G --> H[🌐 thomaslebret.cloud]
+    
+    style H fill:#f96,stroke:#333,stroke-width:2px
+```
 
 
 Chaque modification sur la branche `main` déclenche le workflow suivant :

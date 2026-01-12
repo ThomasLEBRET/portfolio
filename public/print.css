@@ -1,0 +1,69 @@
+/* Configuration de la page */
+@page { 
+    size: A4; 
+    margin: 0; 
+}
+
+@media print {
+    html, body { 
+        width: 210mm; 
+        height: 297mm; 
+        overflow: hidden; 
+        background: white !important; 
+    }
+    .resume-container { 
+        padding: 12mm 15mm !important; 
+    }
+    a { 
+        text-decoration: none !important; 
+        color: #1d4ed8 !important; 
+    }
+}
+
+/* Structure de base */
+.resume-container { 
+    width: 210mm; 
+    height: 297mm; 
+    padding: 40px; 
+    box-sizing: border-box; 
+    background: white;
+}
+
+/* Remplacement des @apply par du CSS natif */
+
+.aside-title { 
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* gap-2 */
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #9ca3af; /* text-gray-400 */
+    margin-bottom: 1.25rem; /* mb-5 */
+    border-bottom: 2px solid #f3f4f6; /* border-gray-100 */
+    padding-bottom: 0.25rem; /* pb-1 */
+}
+
+.main-title { 
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* gap-2 */
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem; /* mb-8 */
+    border-bottom: 4px solid black;
+    padding-bottom: 0.5rem; /* pb-2 */
+}
+
+.exp-item { 
+    break-inside: avoid; 
+}
+
+/* Sécurité pour les couleurs à l'impression */
+* {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}

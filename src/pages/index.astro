@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import SkillBadge from '../components/SkillBadge.astro'; 
 import Card from '../components/Card';
 import { CV } from '../data/cv';
-import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers } from 'lucide-react';
+import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers, FileText } from 'lucide-react';
 import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
 ---
@@ -14,12 +14,19 @@ const posts = await getCollection('blog');
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 grid-rows-auto gap-4">
 
       {/* BLOC 1 : PROFIL */}
-      <Card client:load className="md:col-span-2 md:row-span-2 flex flex-col justify-between min-h-[300px]" delay={0.1}>
+      <Card client:load className="md:col-span-2 md:row-span-2 flex flex-col justify-between min-h-[300px] neon-card" delay={0.1}>
         <div>
           <div class="flex items-center gap-2 mb-2">
             <span class="px-2 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-500/20 animate-pulse">
               Open to work
             </span>
+            <a 
+              href="/resume" 
+              class="flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-xs font-bold rounded-lg border border-blue-500/30 transition-all group font-mono"
+            >
+              <FileText size={14} className="group-hover:scale-110 transition-transform" />
+              VOIR MON CV
+            </a>
           </div>
           <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
             {CV.name}
@@ -34,7 +41,7 @@ const posts = await getCollection('blog');
       </Card>
 
       {/* BLOC 2 : SOCIAL / CONTACT */}
-      <Card client:load className="md:col-span-1 flex flex-col justify-center gap-4" delay={0.2}>
+      <Card client:load className="md:col-span-1 flex flex-col justify-center gap-4 neon-card" delay={0.2}>
         <a href={`mailto:${CV.contact.email}`} class="flex items-center gap-3 hover:text-blue-400 transition-colors">
             <div class="p-2 bg-slate-800 rounded-lg"><Mail size={18} /></div>
             <span class="text-sm font-medium">Email Me</span>
@@ -57,7 +64,7 @@ const posts = await getCollection('blog');
       </Card>
 
       {/* BLOC 3 : LA STACK TECHNIQUE - CORRIGÉ */}
-      <Card client:load className="md:col-span-1 md:row-span-2 bg-gradient-to-b from-slate-900 to-slate-950" delay={0.3}>
+      <Card client:load className="md:col-span-1 md:row-span-2 bg-gradient-to-b from-slate-900 to-slate-950 neon-card" delay={0.3}>
         <div class="flex items-center gap-2 mb-6 text-blue-400">
             <Terminal size={20} />
             <h2 class="font-bold uppercase tracking-wider text-sm">Tech Stack</h2>
@@ -79,7 +86,7 @@ const posts = await getCollection('blog');
       </Card>
 
       {/* BLOC 4 : EXPERIENCE */}
-      <Card client:load className="md:col-span-2 md:row-span-2 overflow-y-auto" delay={0.4}>
+      <Card client:load className="md:col-span-2 md:row-span-2 overflow-y-auto neon-card" delay={0.4}>
          <div class="flex items-center gap-2 mb-6 text-purple-400">
             <Layers size={20} />
             <h2 class="font-bold uppercase tracking-wider text-sm">Expérience</h2>
@@ -111,7 +118,7 @@ const posts = await getCollection('blog');
       </Card>
 
        {/* BLOC 5 : BÉNÉVOLAT */}
-       <Card client:load className="md:col-span-1 flex flex-col justify-center" delay={0.5}>
+       <Card client:load className="md:col-span-1 flex flex-col justify-center neon-card" delay={0.5}>
           <div class="flex items-center gap-2 mb-4 text-pink-400">
             <Heart size={20} />
             <h2 class="font-bold uppercase tracking-wider text-sm">Bénévolat</h2>
@@ -124,7 +131,7 @@ const posts = await getCollection('blog');
       </Card>
       
       {/* BLOC 6 : FORMATION */}
-       <Card client:load className="md:col-span-1" delay={0.6}>
+       <Card client:load className="md:col-span-1 neon-card" delay={0.6}>
          <h2 class="font-bold text-white mb-4">Formation</h2>
          <ul class="space-y-4">
             {CV.education.map(edu => (
@@ -140,7 +147,7 @@ const posts = await getCollection('blog');
       </Card>
 
       {/* BLOC 7 : NOTES TECHNIQUES */}
-        <Card client:load className="md:col-span-4" delay={0.7}>
+        <Card client:load className="md:col-span-4 neon-card" delay={0.7}>
         <div class="flex items-center gap-2 mb-4 text-orange-400">
             <Terminal size={20} />
             <h2 class="font-bold uppercase tracking-wider text-sm">Notes & Insights</h2>

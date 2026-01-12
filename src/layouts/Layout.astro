@@ -13,33 +13,56 @@ const { title } = Astro.props;
 		<meta name="description" content="Portfolio DevOps de Thomas Lebret" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />       
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-slate-950 text-slate-100">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
-    :root {
-        font-family: 'Inter', sans-serif;
-    }
-    /* Scrollbar custom pour faire propre */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #020617; 
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #1e293b; 
-        border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #334155; 
-    }
+	:root {
+		font-family: 'Inter', sans-serif;
+	}
+
+	/* Utilitaires pour le thème DevOps */
+	.font-mono {
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	/* Effet Néon Bleu (Thème principal) */
+	.neon-blue {
+		color: #60a5fa;
+		text-shadow: 0 0 10px rgba(96, 165, 250, 0.5),
+					 0 0 20px rgba(96, 165, 250, 0.3);
+	}
+
+	/* Bordure Néon pour les cartes */
+	.neon-card {
+		@apply transition-all duration-300 border border-slate-800;
+	}
+
+	.neon-card:hover {
+		border-color: #60a5fa;
+		box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+	}
+
+	/* Scrollbar custom */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+	::-webkit-scrollbar-track {
+		background: #020617; 
+	}
+	::-webkit-scrollbar-thumb {
+		background: #1e293b; 
+		border-radius: 4px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #334155; 
+	}
 </style>

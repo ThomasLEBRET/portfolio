@@ -17,13 +17,12 @@ export const CV = {
       company: "CEA",
       role: "Intégrateur d'exploitation",
       period: "2024 - Présent",
-      // J'ai transformé le HTML du JSON en liste claire
       details: [
         "Industrialisation : Déploiement d'images Docker optimisées (multi-stage builds) pour APIs .NET et Angular.",
         "Orchestration : Gestion d'environnements multi-clusters et multi-namespaces via Kustomize et Helm.",
         "Qualité : Rédaction de tests Gherkin pour la validation d'APIs REST."
       ],
-      stack: ["K8s", "Helm", "Kustomize", ".NET"]
+      stack: ["K8s", "Helm", "Kustomize", ".NET", "Rancher", "CI/CD"]
     },
     {
       company: "CEA",
@@ -48,8 +47,8 @@ export const CV = {
   ],
   education: [
     { school: "Université Paris-Saclay", degree: "Master 2 MIAGE", year: "2022 - 2024" },
-    { school: "Université Paris-Saclay", degree: "L3 MIAGE", year: "2022 - 2023" },
-    { school: "Lycée parc de Vilgénis", degree: "BTS SIO SLAM", year: "2021 - 2022" }
+    { school: "Université Paris-Saclay", degree: "L3 MIAGE", year: "2021 - 2022" },
+    { school: "Lycée parc de Vilgénis", degree: "BTS SIO SLAM", year: "2019 - 2021" }
   ],
   volunteering: {
     organization: "Association Le Lien",
