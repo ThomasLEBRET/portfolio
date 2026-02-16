@@ -1,0 +1,147 @@
+---
+interface Props {
+  cvData: any;
+}
+const { cvData } = Astro.props;
+---
+
+<button id="download-docx-btn" class="download-btn" data-cv={JSON.stringify(cvData)}>
+  <span class="icon">📄</span> Télécharger mon Dossier de Compétences (.docx)
+</button>
+
+<script>
+  import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle } from "docx";
+  import { saveAs } from "file-saver";
+
+  const button = document.getElementById("download-docx-btn");
+
+  button?.addEventListener("click", async () => {
+    // 1. Null check pour TypeScript
+    const rawData = button.dataset.cv;
+    if (!rawData) return;
+
+    const data = JSON.parse(rawData);
+
+    // 2. Typage explicite (any) pour éviter les erreurs TS dans les map
+    const createHeading = (text: string) => new Paragraph({
+        text: text.toUpperCase(),
+        heading: HeadingLevel.HEADING_2,
+        border: { bottom: { color: "auto", style: BorderStyle.SINGLE, size: 6, space: 1 } },
+        spacing: { before: 400, after: 200 },
+    });
+
+    const doc = new Document({
+      styles: {
+        default: {
+            document: {
+                run: { font: "Calibri", size: 22 },
+            },
+        },
+      },
+      sections: [{
+        properties: {},
+        children: [
+            // --- EN-TÊTE ---
+            new Paragraph({
+                text: data.basics.name.toUpperCase(),
+                heading: HeadingLevel.HEADING_1,
+                alignment: AlignmentType.CENTER,
+                spacing: { after: 100 },
+            }),
+            new Paragraph({
+                children: [
+                    new TextRun({ text: data.basics.label, bold: true, size: 28 }),
+                ],
+                alignment: AlignmentType.CENTER,
+                spacing: { after: 300 },
+            }),
+            new Paragraph({
+                text: `${data.basics.email} | ${data.basics.phone} | ${data.basics.location.city}`,
+                alignment: AlignmentType.CENTER,
+                spacing: { after: 400 },
+            }),
+
+            // --- SYNTHÈSE ---
+            createHeading("Synthèse"),
+            new Paragraph({
+                text: data.basics.summary,
+                alignment: AlignmentType.JUSTIFIED,
+            }),
+
+            // --- COMPÉTENCES ---
+            createHeading("Compétences Techniques"),
+            ...data.skills.map((skill: any) => new Paragraph({
+                children: [
+                    new TextRun({ text: `${skill.name} : `, bold: true }),
+                    new TextRun({ text: skill.keywords.join(", ") })
+                ],
+                spacing: { after: 100 },
+                bullet: { level: 0 }
+            })),
+
+            // --- EXPÉRIENCES ---
+            createHeading("Expériences Professionnelles"),
+            ...data.work.flatMap((job: any) => [
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: job.position, bold: true, size: 24 }),
+                        new TextRun({ text: ` chez ${job.name}`, italics: true }),
+                    ],
+                    spacing: { before: 200 },
+                }),
+                new Paragraph({
+                    text: `${job.startDate} - ${job.endDate || "Présent"}`,
+                    alignment: AlignmentType.RIGHT,
+                    spacing: { after: 100 },
+                }),
+                // CORRECTION ICI : italics doit être dans un TextRun, pas dans le Paragraph
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: job.summary, italics: true })
+                    ],
+                    spacing: { after: 100 },
+                }),
+                ...job.highlights.map((h: string) => new Paragraph({
+                    text: h,
+                    bullet: { level: 0 }
+                }))
+            ]),
+
+            // --- FORMATION ---
+            createHeading("Formation"),
+            ...data.education.map((edu: any) => new Paragraph({
+                children: [
+                    new TextRun({ text: `${edu.studyType} - ${edu.area}`, bold: true }),
+                    new TextRun({ text: `, ${edu.institution}` }),
+                    new TextRun({ text: ` (${edu.endDate.substring(0,4)})`, italics: true })
+                ],
+                bullet: { level: 0 }
+            })),
+        ]
+      }]
+    });
+
+    const blob = await Packer.toBlob(doc);
+    saveAs(blob, `Dossier_Competences_Thomas_LEBRET.docx`);
+  });
+</script>
+
+<style>
+  .download-btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem; /* Petit bouton discret */
+    transition: background 0.2s;
+  }
+  .download-btn:hover {
+    background-color: #1d4ed8;
+  }
+</style>

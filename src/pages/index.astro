@@ -2,10 +2,17 @@
 import Layout from '../layouts/Layout.astro';
 import SkillBadge from '../components/SkillBadge.astro'; 
 import Card from '../components/Card';
+import DownloadCV from '../components/DownloadCV.astro'; // <--- Import du composant
 import { CV } from '../data/cv';
 import { MapPin, Mail, Phone, Linkedin, Terminal, Heart, Layers, FileText } from 'lucide-react';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+// Récupération des articles de blog
 const posts = await getCollection('blog');
+
+// Récupération des données du CV pour le bouton Word
+const resumeEntry = await getEntry('cv', 'resume');
+const resumeData = resumeEntry ? resumeEntry.data : null;
 ---
 
 <Layout title={`Portfolio - ${CV.name}`}>
@@ -16,18 +23,29 @@ const posts = await getCollection('blog');
       {/* BLOC 1 : PROFIL */}
       <Card client:load className="md:col-span-2 md:row-span-2 flex flex-col justify-between min-h-[300px] neon-card" delay={0.1}>
         <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="px-2 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-500/20 animate-pulse">
+          {/* Header avec Badge + Boutons CV */}
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <span class="px-2 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-500/20 animate-pulse whitespace-nowrap">
               Open to work
             </span>
+            
+            {/* Lien vers la page CV Web */}
             <a 
               href="/resume" 
               class="flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-xs font-bold rounded-lg border border-blue-500/30 transition-all group font-mono"
             >
               <FileText size={14} className="group-hover:scale-110 transition-transform" />
-              VOIR MON CV
+              WEB
             </a>
+
+            {/* NOUVEAU : Bouton Télécharger Word */}
+            {resumeData && (
+              <div class="scale-90 origin-left">
+                 <DownloadCV cvData={resumeData} />
+              </div>
+            )}
           </div>
+
           <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
             {CV.name}
           </h1>
@@ -63,14 +81,13 @@ const posts = await getCollection('blog');
         </div>
       </Card>
 
-      {/* BLOC 3 : LA STACK TECHNIQUE - CORRIGÉ */}
+      {/* BLOC 3 : LA STACK TECHNIQUE */}
       <Card client:load className="md:col-span-1 md:row-span-2 bg-gradient-to-b from-slate-900 to-slate-950 neon-card" delay={0.3}>
         <div class="flex items-center gap-2 mb-6 text-blue-400">
             <Terminal size={20} />
             <h2 class="font-bold uppercase tracking-wider text-sm">Tech Stack</h2>
         </div>
         <div class="flex flex-wrap gap-2">
-            {/* Utilisation du composant SkillBadge avec les props attendues */}
             {CV.skills.map(skill => (
                 <SkillBadge name={skill} />
             ))}
