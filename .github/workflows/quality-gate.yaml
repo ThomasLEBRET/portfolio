@@ -1,4 +1,4 @@
-name: 🛡️ Quality Gate (CI)
+name: Quality Gate (CI)
 
 on:
   push:
@@ -11,34 +11,32 @@ jobs:
     runs-on: ubuntu-latest
     environment: cloudflare
     steps:
-      - name: 📥 Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
-          submodules: recursive
-          token: ${{ secrets.MY_GITHUB_PAT }}
           fetch-depth: 0
 
-      - name: 🟢 Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: 🔍 Linting (ESLint)
+      - name: Linting (ESLint)
         run: npm run lint
 
-      - name: 🏗️ Astro Check (Type-safety)
+      - name: Type check (svelte-check)
         run: npm run check
 
-      - name: 🔨 Build Test
+      - name: Build
         run: npm run build
 
-      - name: 🚀 Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=portfolio
+          command: pages deploy build --project-name=portfolio

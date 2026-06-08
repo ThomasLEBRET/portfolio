@@ -1,0 +1,136 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Thomas Lebret",
+    "label": "Ingenieur DevOps",
+    "email": "th.lebret@protonmail.com",
+    "phone": "06 59 81 94 73",
+    "url": "https://thomaslebret.cloud",
+    "summary": "Ingenieur DevOps specialise Kubernetes/Docker avec une expertise en production critique. Profil hybride avec 3 ans d'experience en Chef de Projet IT. Je construis des ponts entre le code et l'infra.",
+    "location": {
+      "city": "Issy-les-Moulineaux",
+      "region": "Ile-de-France",
+      "countryCode": "FR"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "thomas-lebret",
+        "url": "https://linkedin.com/in/thomas-lebret"
+      },
+      {
+        "network": "GitHub",
+        "username": "ThomasLEBRET",
+        "url": "https://github.com/ThomasLEBRET"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "CEA Paris-Saclay",
+      "position": "Integrateur d'exploitation",
+      "startDate": "2024-01",
+      "summary": "Responsable du cycle de vie des APIs de production : packaging, deploiement, exposition reseau et haute disponibilite en environnement multi-clusters.",
+      "highlights": [
+        "Industrialisation : deploiement d'images Docker optimisees (multi-stage builds) pour APIs .NET et Angular.",
+        "Orchestration : gestion d'environnements multi-clusters et multi-namespaces via Kustomize et Helm.",
+        "Qualite : redaction de tests Gherkin pour la validation d'APIs REST."
+      ],
+      "keywords": ["Kubernetes", "Helm", "Kustomize", "Docker", "Rancher", "CI/CD", "GitLab CI"]
+    },
+    {
+      "name": "CEA Paris-Saclay",
+      "position": "Chef de projet IT",
+      "alternance": true,
+      "startDate": "2022-01",
+      "endDate": "2024-01",
+      "summary": "Pilotage de prestations d'infogerance pour la creation et la maintenance d'applications metiers a la DSI.",
+      "highlights": [
+        "Pilotage de prestation d'infogerance pour creer et maintenir des applications metiers.",
+        "Gestion des delais imposes (Gantt) et PMO entre metier et infogerance."
+      ],
+      "keywords": ["Management", "PMO", "Gantt", "Agile", "Scrum"]
+    },
+    {
+      "name": "CEA Paris-Saclay",
+      "position": "Developpeur Low-code",
+      "alternance": true,
+      "startDate": "2021-09",
+      "endDate": "2022-08",
+      "summary": "Modernisation des processus administratifs RH, achat et finance via des applications low-code.",
+      "highlights": [
+        "Creation d'applications low-code pour les metiers du CEA.",
+        "Installation d'applications multi-environnements."
+      ],
+      "keywords": ["K2 Nintex", "SQL Server", "SAP", "BPMN", "C#"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universite Paris-Saclay",
+      "area": "MIAGE",
+      "studyType": "Master 2",
+      "startDate": "2022-09",
+      "endDate": "2024-09"
+    },
+    {
+      "institution": "Universite Paris-Saclay",
+      "area": "MIAGE",
+      "studyType": "Licence 3",
+      "startDate": "2021-09",
+      "endDate": "2022-09"
+    },
+    {
+      "institution": "Lycee Parc de Vilgenis",
+      "area": "SIO SLAM",
+      "studyType": "BTS",
+      "startDate": "2019-09",
+      "endDate": "2021-06"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Orchestration & Conteneurs",
+      "keywords": ["Kubernetes", "Docker", "Helm", "Kustomize", "Rancher"]
+    },
+    {
+      "name": "CI/CD & Automatisation",
+      "keywords": ["GitLab CI", "GitHub Actions", "Git", "Bash", "Linux"]
+    },
+    {
+      "name": "Securite & Authentification",
+      "keywords": ["Keycloak", "OAuth2", "OpenID Connect", "SSL/TLS", "Nginx"]
+    },
+    {
+      "name": "Developpement",
+      "keywords": ["Python", "PowerShell", "C# .NET", "JavaScript", "SQL"]
+    },
+    {
+      "name": "Methodes",
+      "keywords": ["Agile", "Scrum", "Kanban", "BPMN", "ITIL", "PMO"]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Association Le Lien",
+      "position": "Professeur de francais et mathematiques",
+      "startDate": "2025-01",
+      "summary": "Aide a l'integration de ressortissants etrangers : pedagogie adaptee a des publics varies et engagement humain."
+    }
+  ],
+  "interests": [
+    { "name": "Cuisine" },
+    { "name": "IA generative" },
+    { "name": "Veille technologique" }
+  ],
+  "languages": [
+    {
+      "language": "Francais",
+      "fluency": "Langue maternelle"
+    },
+    {
+      "language": "Anglais",
+      "fluency": "Technique B1"
+    }
+  ]
+}
